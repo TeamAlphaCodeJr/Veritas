@@ -1,0 +1,48 @@
+:root {
+    /* Primary Theme Colors */
+    --background: #faf9f5;
+    --foreground: #3d3929;
+    --primary: #c96442;
+    --primary-foreground: #ffffff;
+
+    /* Secondary & Accent Colors */
+    --secondary: #e9e6dc;
+    --secondary-foreground: #535146;
+    --accent: #e9e6dc;
+    --accent-foreground: #28261b;
+
+    /* UI Component Colors */
+    --card: #faf9f5;
+    --card-foreground: #141413;
+    --popover: #ffffff;
+    --popover-foreground: #28261b;
+    --muted: #ede9de;
+    --muted-foreground: #83827d;
+
+    /* Utility & Form Colors */
+    --border: #dad9d4;
+    --input: #b4b2a7;
+    --ring: #c96442;
+
+    /* Status & Feedback Colors */
+    --destructive: #141413;
+    --destructive-foreground: #ffffff;
+
+    /* Chart & Visualization Colors */
+    --chart-1: #b05730;
+    --chart-2: #9c87f5;
+    --chart-3: #ded8c4;
+    --chart-4: #dbd3f0;
+    --chart-5: #b4552d;
+
+    /* Sidebar & Navigation Colors */
+    --sidebar-background: #f5f4ee;
+    --sidebar-foreground: #3d3d3a;
+    --sidebar-primary: #c96442;
+    --sidebar-primary-foreground: #fbfbfb;
+    --sidebar-accent: #e9e6dc;
+    --sidebar-accent-foreground: #343434;
+    --sidebar-border: #ebebeb;
+    --sidebar-ring: #b5b5b5;
+}
+
