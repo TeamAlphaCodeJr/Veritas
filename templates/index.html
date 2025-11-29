@@ -4,6 +4,16 @@
 <section class="controls">
     <form method="POST" action="/choose">
         <div class="controls-top">
+            <div class="dashboard-summary">
+                <div class="dash-item">
+                    <span class="dash-label">Reliability</span>
+                    <label class="switch">
+                        <input type="checkbox" checked disabled>
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="dash-value">High Only</span>
+                </div>
+            </div>
             <button type="button" class="control-toggle" data-target="#sourcesPanel">Select news sources</button>
             <div class="controls-actions">
                 <button class="btn accent" type="submit">Apply filters</button>
@@ -44,6 +54,22 @@
             <div class="card-content">
                 <h3 class="card-title"><a href="{{ article[1].link }}" target="_blank">{{ article[1].title }}</a></h3>
                 <div class="meta">{{ article[1].published }} &middot; <span class="source">{{ article[0] }}</span></div>
+                
+                <div class="card-metrics">
+                    <div class="metric-bias">
+                        <span class="metric-label">Bias:</span>
+                        {% set bias = source_bias.get(article[0], 'Center') %}
+                        <span class="bias-tag {{ bias.lower() }}">{{ bias }}</span>
+                    </div>
+                    <div class="metric-reliability">
+                        <span class="metric-label">Reliability:</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 98%"></div>
+                        </div>
+                        <span class="reliability-score">98%</span>
+                    </div>
+                </div>
+
                 <a class="read-more" href="{{ article[1].link }}" target="_blank">Read</a>
             </div>
         </article>
