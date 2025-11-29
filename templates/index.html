@@ -1,153 +1,87 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="articles">
-        <form method="POST" action="/choose">
-            <div class="accordion" id="newsSourcesAccordion">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingOne">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                            Select News Sources
-                        </button>
-                    </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#newsSourcesAccordion">
-                        <div class="accordion-body">
-                            {% for source in sources %}
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="source_{{ loop.index }}" name="sources" value="{{ source }}" {% if source in allowed %}checked{% endif %}>
-                                    <label class="form-check-label" for="source_{{ loop.index }}">{{ source }}</label>
-                                </div>
-                            {% endfor %}
-                        <div class="btn-group mt-3" role="group" aria-label="Political buttons">
-                            <button type="button" class="btn btn-primary" id="libButton">Liberal</button>
-                            <button type="button" class="btn" id="centerButton" style="background: linear-gradient(to right, #0d6efd, #dc3545); color: white;">Center</button>
-                            <button type="button" class="btn btn-danger" id="consButton">Conservative</button>
-                        </div>
-                        <div class="btn-group mt-3" role="group" aria-label="Region buttons">
-                            <button type="button" class="btn btn-warning" id="usButton">US</button>
-                            <button type="button" class="btn btn-warning" id="worldButton">World</button>
-                        </div>
-                        <div class="btn-group mt-3" role="group" aria-label="Filter buttons">
-                            <button type="button" class="btn btn-info" id="financeButton">Finance</button>
-                            <button type="button" class="btn btn-info" id="politicsButton">Politics</button>
-                            <button type="button" class="btn btn-info" id="techButton">Technology</button>
-                        </div><br>
-                        <button type="submit" class="btn btn-success mt-3">Filter</button>
-                        <button type="button" class="btn btn-secondary mt-3" id="clearButton">Clear</button>
-                        <button type="button" class="btn btn-secondary mt-3" id="selectAllButton">Select all</button><br>
-                        <script>
-                            document.getElementById('clearButton').addEventListener('click', function() {
-                                document.querySelectorAll('.form-check-input').forEach(function(checkbox) {
-                                    checkbox.checked = false;
-                                });
-                            });
-
-                            document.getElementById('selectAllButton').addEventListener('click', function() {
-                                document.querySelectorAll('.form-check-input').forEach(function(checkbox) {
-                                    checkbox.checked = true;
-                                });
-                            });
-
-                            document.getElementById('consButton').addEventListener('click', function() {
-    document.querySelectorAll('.form-check-input').forEach(function(checkbox) {
-        if (['Fox News - Business', 'Fox News - Politics', 'Wall Street Journal', 'The Hill', 'Bloomberg - Politics'].includes(checkbox.value)) {
-            checkbox.checked = true;
-        } else {
-            checkbox.checked = false;
-        }
-    });
-});
-
-document.getElementById('libButton').addEventListener('click', function() {
-    document.querySelectorAll('.form-check-input').forEach(function(checkbox) {
-        if (['New York Times - Technology', 'Washington Post - Opinions', 'The Guardian - World', 'NPR - Politics'].includes(checkbox.value)) {
-            checkbox.checked = true;
-        } else {
-            checkbox.checked = false;
-        }
-    });
-});
-
-document.getElementById('centerButton').addEventListener('click', function() {
-    document.querySelectorAll('.form-check-input').forEach(function(checkbox) {
-        if (['BBC - World', 'Al Jazeera - Top Stories', 'Reuters - World News', 'NPR - News'].includes(checkbox.value)) {
-            checkbox.checked = true;
-        } else {
-            checkbox.checked = false;
-        }
-    });
-});
-
-document.getElementById('usButton').addEventListener('click', function() {
-    document.querySelectorAll('.form-check-input').forEach(function(checkbox) {
-        if (['Fox News - Business', 'Fox News - Politics', 'New York Times - Technology', 'Washington Post - Opinions', 'CNN - Top Stories', 'USA Today - News'].includes(checkbox.value)) {
-            checkbox.checked = true;
-        } else {
-            checkbox.checked = false;
-        }
-    });
-});
-
-document.getElementById('worldButton').addEventListener('click', function() {
-    document.querySelectorAll('.form-check-input').forEach(function(checkbox) {
-        if (['BBC - World', 'The Guardian - World', 'Al Jazeera - Top Stories', 'Reuters - World News', 'Associated Press - World'].includes(checkbox.value)) {
-            checkbox.checked = true;
-        } else {
-            checkbox.checked = false;
-        }
-    });
-});
-
-document.getElementById('financeButton').addEventListener('click', function() {
-    document.querySelectorAll('.form-check-input').forEach(function(checkbox) {
-        if (['Yahoo Finance', 'Wall Street Journal', 'CNBC', 'Financial Times - Markets', 'Bloomberg - Markets', 'Fox News - Business', 'Reuters - Business', 'Forbes - Business'].includes(checkbox.value)) {
-            checkbox.checked = true;
-        } else {
-            checkbox.checked = false;
-        }
-    });
-});
-
-document.getElementById('politicsButton').addEventListener('click', function() {
-    document.querySelectorAll('.form-check-input').forEach(function(checkbox) {
-        if (['Fox News - Politics', 'Bloomberg - Politics', 'The Hill', 'Politico - Politics', 'NPR - Politics'].includes(checkbox.value)) {
-            checkbox.checked = true;
-        } else {
-            checkbox.checked = false;
-        }
-    });
-});
-
-document.getElementById('techButton').addEventListener('click', function() {
-    document.querySelectorAll('.form-check-input').forEach(function(checkbox) {
-        if (['New York Times - Technology', 'Washington Post - Technology', 'TechCrunch', 'Wired', 'The Verge', 'Ars Technica', 'CNET'].includes(checkbox.value)) {
-            checkbox.checked = true;
-        } else {
-            checkbox.checked = false;
-        }
-    });
-});
-                        </script>
-                    </div>
+<section class="controls">
+    <form method="POST" action="/choose">
+        <div class="controls-top">
+            <button type="button" class="control-toggle" data-target="#sourcesPanel">Select news sources</button>
+            <div class="controls-actions">
+                <button class="btn accent" type="submit">Apply filters</button>
+            </div>
+        </div>
+        <div id="sourcesPanel" class="panel">
+            <div class="sources-grid">
+                {% for source in sources %}
+                <label class="source-item">
+                    <input class="source-checkbox" type="checkbox" name="sources" value="{{ source }}" {% if source in allowed %}checked{% endif %}>
+                    <span class="source-name">{{ source }}</span>
+                </label>
+                {% endfor %}
+            </div>
+            <div class="quick-filters">
+                <div class="filter-group">
+                    <button type="button" class="chip" data-presets="conservative">Conservative</button>
+                    <button type="button" class="chip" data-presets="liberal">Liberal</button>
+                    <button type="button" class="chip" data-presets="center">Center</button>
+                </div>
+                <div class="filter-group">
+                    <button type="button" class="chip" data-presets="us">US</button>
+                    <button type="button" class="chip" data-presets="world">World</button>
+                </div>
+                <div class="filter-actions">
+                    <button type="button" class="btn ghost" id="clearButton">Clear</button>
+                    <button type="button" class="btn ghost" id="selectAllButton">Select all</button>
                 </div>
             </div>
-        </form>
-    </div>
-    <div class="articles">
+        </div>
+    </form>
+</section>
+
+<section class="articles">
+    <div class="grid">
         {% for article in articles %}
-            <article>
-                <h2><a href="{{ article[1].link }}" target="_blank">{{ article[1].title }}</a></h2>
-                <p>{{ article[1].published }}</p>
-                <p>Source: {{ article[0] }}</p>
-            </article>
+        <article class="card">
+            <div class="card-content">
+                <h3 class="card-title"><a href="{{ article[1].link }}" target="_blank">{{ article[1].title }}</a></h3>
+                <div class="meta">{{ article[1].published }} &middot; <span class="source">{{ article[0] }}</span></div>
+                <a class="read-more" href="{{ article[1].link }}" target="_blank">Read</a>
+            </div>
+        </article>
         {% endfor %}
     </div>
-    <div class="pagination">
+    <div class="pagination center">
         {% if page > 1 %}
-            <a href="{{ url_for('index', page=page-1) }}">Previous</a>
+        <a class="page-btn" href="{{ url_for('index', page=page-1) }}">Previous</a>
         {% endif %}
         {% if page < total_pages %}
-            <a href="{{ url_for('index', page=page+1) }}">Next</a>
+        <a class="page-btn" href="{{ url_for('index', page=page+1) }}">Next</a>
         {% endif %}
     </div>
+</section>
+
+<script>
+    document.getElementById('clearButton').addEventListener('click', function() {
+        document.querySelectorAll('.source-checkbox').forEach(function(cb) { cb.checked = false; });
+    });
+    document.getElementById('selectAllButton').addEventListener('click', function() {
+        document.querySelectorAll('.source-checkbox').forEach(function(cb) { cb.checked = true; });
+    });
+    var presets = {
+        conservative: ['Fox News - Business', 'Fox News - Politics', 'Wall Street Journal', 'The Hill', 'Bloomberg - Politics'],
+        liberal: ['New York Times - Technology', 'Washington Post - Opinions', 'The Guardian - World', 'NPR - Politics'],
+        center: ['BBC - World', 'Al Jazeera - Top Stories', 'Reuters - World News', 'NPR - News'],
+        us: ['Fox News - Business', 'Fox News - Politics', 'New York Times - Technology', 'Washington Post - Opinions', 'CNN - Top Stories', 'USA Today - News'],
+        world: ['BBC - World', 'The Guardian - World', 'Al Jazeera - Top Stories', 'Reuters - World News', 'Associated Press - World']
+    };
+    document.querySelectorAll('.chip').forEach(function(chip) {
+        chip.addEventListener('click', function() {
+            var key = chip.getAttribute('data-presets');
+            var set = presets[key] || [];
+            document.querySelectorAll('.source-checkbox').forEach(function(cb) {
+                cb.checked = set.indexOf(cb.value) !== -1;
+            });
+        });
+    });
+</script>
+
 {% endblock %}

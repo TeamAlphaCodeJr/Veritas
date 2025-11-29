@@ -1,14 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2 style="text-align: center;">Search Results For: {{ query }}</h2>
-    <div class="articles">
+<section class="search-results">
+    <h2 class="results-heading">Search Results for: <span class="query">{{ query }}</span></h2>
+    <div class="grid">
         {% for article in articles %}
-            <article>
-                <h2><a href="{{ article[1].link }}">{{ article[1].title }}</a></h2>
-                <p>{{ article[1].published }}</p>
-                <p>Source: {{ article[0] }}</p>
-            </article>
+        <article class="card">
+            <div class="card-content">
+                <h3 class="card-title"><a href="{{ article[1].link }}" target="_blank">{{ article[1].title }}</a></h3>
+                <div class="meta">{{ article[1].published }} &middot; <span class="source">{{ article[0] }}</span></div>
+                <a class="read-more" href="{{ article[1].link }}" target="_blank">Read</a>
+            </div>
+        </article>
         {% endfor %}
     </div>
+</section>
 {% endblock %}

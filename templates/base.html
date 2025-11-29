@@ -2,18 +2,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
-    <title>VNews</title><link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Veritas</title>
 </head>
 <body>
-<header>
-    <a href="/" style="color: white; text-decoration: none;"><h1>VNews</h1></a>
-    <form action="{{ url_for('search') }}" method="GET">
-        <input type="text" name="q" placeholder="Search For Keyword">
-        <button type="submit">Search</button>
-    </form>
-</header>
-{% block content %}{% endblock %}
+<nav class="site-nav">
+    <div class="nav-inner container">
+        <a class="brand" href="/">Veritas</a>
+        <form class="search-form" action="{{ url_for('search') }}" method="GET">
+            <input class="search-input" type="text" name="q" placeholder="Search articles, topics or sources">
+            <button class="search-btn" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+<main class="site-main">
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</main>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener('click', function(e) {
+        if (e.target.matches('.toggle-collapse')) {
+            var target = document.querySelector(e.target.getAttribute('data-target'));
+            if (target) {
+                target.classList.toggle('show-collapse');
+            }
+        }
+    });
+</script>
 </body>
 </html>
