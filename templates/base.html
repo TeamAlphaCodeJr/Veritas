@@ -8,12 +8,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='themes.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='Veritasnews.png') }}?v=2">
     <title>Veritas</title>
 </head>
 <body>
 <nav class="site-nav">
     <div class="nav-inner container">
-        <a class="brand" href="/">Veritas</a>
+        <a class="brand" href="/">
+            <img src="{{ url_for('static', filename='Veritasnews.png') }}?v=2" alt="Veritas Logo" class="nav-logo">
+            Veritas
+        </a>
         <form class="search-form" action="{{ url_for('search') }}" method="GET">
             <input class="search-input" type="text" name="q" placeholder="Search articles, topics or sources">
             <button class="search-btn" type="submit">Search</button>

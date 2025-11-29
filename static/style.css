@@ -46,6 +46,14 @@ body {
     text-decoration: none;
     letter-spacing: 0.4px;
     justify-self: start;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-logo {
+    height: 32px;
+    width: auto;
 }
 
 .search-form {
