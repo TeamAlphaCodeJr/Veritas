@@ -18,10 +18,13 @@
                     </div>
                     <div class="metric-reliability">
                         <span class="metric-label">Reliability:</span>
+                        {% set rel = article[2] if article|length > 2 else 'N/A' %}
+                        {% set rel_value = (article[3] * 100)|round(0) if article|length > 3 else 0 %}
+                        {% set rel_width = rel_value ~ '%' %}
                         <div class="progress-bar">
-                            <div class="progress-fill" style="width: 98%"></div>
+                            <div class="progress-fill" style="width: {{ rel_width }}"></div>
                         </div>
-                        <span class="reliability-score">98%</span>
+                        <span class="reliability-score">{{ rel }}</span>
                     </div>
                 </div>
 

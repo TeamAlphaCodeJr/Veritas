@@ -1,9 +1,7 @@
-# Ignore virtual environments
 venv/
 .venv/
-
-# Ignore Python bytecode caches
 __pycache__/
 **/__pycache__/
 *.py[cod]
 *$py.class
+data/dataset.csv
